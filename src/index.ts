@@ -79,13 +79,16 @@ async function executeGitHubCommand(
     if (options?.body) {
       tempBodyFile = join(tmpdir(), `gh-pr-body-${Date.now()}.txt`);
       writeFileSync(tempBodyFile, options.body, 'utf8');
-      finalCommand = finalCommand.replace(/--body ".*?"/, `--body-file "${tempBodyFile}"`);
+
+      // Replace --body with --body-file, handling both quoted and unquoted body content
+      finalCommand = finalCommand.replace(/--body\s+"[^"]*"/, `--body-file "${tempBodyFile}"`);
+      finalCommand = finalCommand.replace(/--body\s+[^\s]+/, `--body-file "${tempBodyFile}"`);
     }
 
-    // If we have a title, properly escape it
+    // If we have a title, properly escape it for PowerShell
     if (options?.title) {
       const escapedTitle = escapePowerShellString(options.title);
-      finalCommand = finalCommand.replace(/--title ".*?"/, `--title '${escapedTitle}'`);
+      finalCommand = finalCommand.replace(/--title\s+"([^"]*)"/, `--title '${escapedTitle}'`);
     }
 
     // Build the PowerShell command with proper token clearing
