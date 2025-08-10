@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that provides automated Git workflow tools for committing, creating pull requests, and merging with proper GitHub authentication handling.
 
+<a href="https://glama.ai/mcp/servers/@Arcia125/git-workflow-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@Arcia125/git-workflow-mcp-server/badge" alt="Git Workflow Automation Server MCP server" />
+</a>
+
 ## Features
 
 - **Automated Git Operations**: Commit, push, create PRs, and merge in one command
