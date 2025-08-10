@@ -102,20 +102,65 @@ use_mcp_tool("git-workflow", "complete_git_workflow", {
 
 ## Installation
 
-The server is automatically configured in your MCP settings. If you need to manually add it:
+### Quick Setup
 
-```json
-{
-  "mcpServers": {
-    "git-workflow": {
-      "command": "node",
-      "args": ["C:/Users/Arcia/AppData/Roaming/Roo-Code/MCP/git-workflow-server/build/index.js"],
-      "disabled": false,
-      "alwaysAllow": [],
-      "disabledTools": []
-    }
-  }
-}
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Arcia125/git-workflow-mcp-server.git
+   cd git-workflow-mcp-server
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Build the Server**
+   ```bash
+   npm run build
+   ```
+
+4. **Add to MCP Configuration**
+
+   Add the server to your MCP client settings file:
+
+   ```json
+   {
+     "mcpServers": {
+       "git-workflow": {
+         "command": "node",
+         "args": ["/path/to/git-workflow-mcp-server/build/index.js"],
+         "disabled": false,
+         "alwaysAllow": [],
+         "disabledTools": []
+       }
+     }
+   }
+   ```
+
+### Alternative: NPM Global Install (Coming Soon)
+
+Future versions will support global npm installation:
+```bash
+npm install -g git-workflow-mcp-server
+```
+
+### Configuration Paths
+
+**Common MCP Settings Locations:**
+- **Roo-Code**: `%APPDATA%/Code - Insiders/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json`
+- **Claude Desktop**: `%APPDATA%/Claude/claude_desktop_config.json`
+- **Other MCP Clients**: Check your client's documentation for settings location
+
+### Verify Installation
+
+Test the installation with a dry run:
+```javascript
+use_mcp_tool("git-workflow", "git_commit_and_push", {
+  "files": ["README.md"],
+  "commitMessage": "test: verify MCP server installation",
+  "dryRun": true
+})
 ```
 
 ## Prerequisites
